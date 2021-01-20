@@ -1,4 +1,4 @@
-# Metis (FFmpeg in Golang)
+# FFmpeg in Golang
 
 Simple level integration for easy installation.
 To start, you need to have the FFmpeg installed:
