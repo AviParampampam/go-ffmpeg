@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/AviParampampam/Metis/pkg/ffmpeg"
+	ffmpeg "github.com/AviParampampam/go-ffmpeg"
 )
 
 func main() {
