@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 )
 
 // Input is a input file and options part of the ffmpeg command.
@@ -30,6 +31,7 @@ type Command struct {
 	FFmpegPath  string
 	InputGroup  InputGroup
 	OutputGroup OutputGroup
+	ExecCmd     *exec.Cmd
 }
 
 // NewCommand is a function for creating new ffmpeg command.
@@ -72,30 +74,34 @@ func (cmd *Command) Cmd() *exec.Cmd {
 }
 
 // Run starts the specified command and waits for it to complete.
-func (cmd *Command) Run(stderr, stdout *os.File) {
-	c := cmd.Cmd()
+func (cmd *Command) Run(stderr, stdout *os.File) error {
+	cmd.ExecCmd = cmd.Cmd()
 
-	c.Stderr = stderr
-	c.Stdout = stdout
+	cmd.ExecCmd.Stderr = stderr
+	cmd.ExecCmd.Stdout = stdout
 
-	c.Run()
+	return cmd.ExecCmd.Run()
 }
 
 // Start starts the specified command but does not wait for it to complete.
-func (cmd *Command) Start(stderr, stdout *os.File) *exec.Cmd {
-	c := cmd.Cmd()
+func (cmd *Command) Start(stderr, stdout *os.File) error {
+	cmd.ExecCmd = cmd.Cmd()
 
-	c.Stderr = stderr
-	c.Stdout = stdout
+	cmd.ExecCmd.Stderr = stderr
+	cmd.ExecCmd.Stdout = stdout
 
-	c.Start()
+	return cmd.ExecCmd.Start()
+}
 
+func (cmd *Command) Serve(stderr, stdout *os.File, delaySec int) *exec.Cmd {
 	for {
-		fmt.Println(c.ProcessState)
-
+		fmt.Println(cmd.Run(stderr, stdout))
+		time.Sleep(time.Second * time.Duration(delaySec))
 	}
+}
 
-	return c
+func (cmd *Command) Kill(stderr, stdout *os.File) error {
+	return cmd.ExecCmd.Process.Kill()
 }
 
 // NewInput is a function for creating new input file for ffmpeg command.
