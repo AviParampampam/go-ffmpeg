@@ -7,8 +7,7 @@ import (
 )
 
 func main() {
-	config := ffmpeg.NewConfig()
-	f := ffmpeg.New(config)
+	f := ffmpeg.New(ffmpeg.NewConfig())
 
 	createCommand(f).Start(os.Stderr, os.Stdout)
 }
