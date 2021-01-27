@@ -378,7 +378,7 @@ func OptionSTimeout(timeout int) string {
 // OptionUserAgent - override User-Agent header. If not specified, it
 // defaults to the libavformat identifier string.
 func OptionUserAgent(ua string) string {
-	return "user-agent " + ua
+	return "-user-agent " + ua
 }
 
 // OptionFPS - set frame rate (Hz value, fraction or abbreviation).
