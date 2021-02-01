@@ -39,6 +39,10 @@ func OptionHlsDeleteThreshold(size int) string {
 	return "-hls_delete_threshold " + strconv.Itoa(size)
 }
 
+func OptionHlsFlags(flags string) string {
+	return "-hls_flags " + flags
+}
+
 // OptionHlsTsOptions - set output format options using a :-separated
 // list of key=value parameters. Values containing : special characters
 // must be escaped.
@@ -403,4 +407,13 @@ func OptionStrftime(v bool) string {
 // OptionFormat - force input or output file format.
 func OptionFormat(frmt string) string {
 	return "-f " + frmt
+}
+
+func OptionSize(size string) string {
+	return "-s " + size
+}
+
+// OptionPreset - collection of options that will provide a certain encoding speed to compression ratio.
+func OptionPreset(preset string) string {
+	return "-preset " + preset
 }

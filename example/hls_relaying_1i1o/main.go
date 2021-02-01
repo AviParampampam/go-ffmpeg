@@ -7,9 +7,7 @@ import (
 func main() {
 	f := ffmpeg.New(ffmpeg.NewConfig())
 
-	go createCommand(f, "/tmp/relaying/cam1/out.m3u8").Serve(nil, nil, 8)
-	go createCommand(f, "/tmp/relaying/cam2/out.m3u8").Serve(nil, nil, 8)
-	createCommand(f, "/tmp/relaying/cam3/out.m3u8").Serve(nil, nil, 8)
+	createCommand(f, "/tmp/relaying/out.m3u8").Serve(nil, nil, 8)
 }
 
 func createCommand(f *ffmpeg.FFmpeg, output string) *ffmpeg.Command {
@@ -24,10 +22,11 @@ func createCommand(f *ffmpeg.FFmpeg, output string) *ffmpeg.Command {
 	outputGroup := ffmpeg.NewOutputGroup(
 		ffmpeg.NewOutput(
 			output,
+			ffmpeg.OptionVideoCodec("copy"),
 			ffmpeg.OptionNoAudio(),
 			ffmpeg.OptionFormat("hls"),
-			ffmpeg.OptionHlsTime(4),
-			ffmpeg.OptionHlsListSize(16),
+			ffmpeg.OptionHlsTime(2),
+			ffmpeg.OptionHlsListSize(6),
 			"-hls_flags delete_segments",
 		),
 	)
