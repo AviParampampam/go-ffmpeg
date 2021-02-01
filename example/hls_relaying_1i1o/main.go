@@ -5,7 +5,10 @@ import (
 )
 
 func main() {
-	f := ffmpeg.New(ffmpeg.NewConfig())
+	f, err := ffmpeg.New(ffmpeg.NewConfig()).Init()
+	if err != nil {
+		panic(err)
+	}
 
 	createCommand(f, "/tmp/relaying/out.m3u8").Serve(nil, nil, 8)
 }

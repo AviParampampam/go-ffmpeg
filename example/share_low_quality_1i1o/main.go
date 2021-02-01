@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	f := ffmpeg.New(ffmpeg.NewConfig())
+	f, err := ffmpeg.New(ffmpeg.NewConfig()).Init()
+	if err != nil {
+		panic(err)
+	}
 
 	// go createCommand(f, "rtsp://admin:12345678@192.168.1.101:554/ch01/0", "/tmp/relaying_low/out1.mpd").Serve(os.Stderr, os.Stdout, 8)
 	// go createCommand(f, "rtsp://admin:12345678@192.168.1.15:554/ch01.264?dev=1", "/tmp/relaying_low/out2.mpd").Serve(os.Stderr, os.Stdout, 8)

@@ -37,7 +37,7 @@ type Command struct {
 // NewCommand is a function for creating new ffmpeg command.
 func (ffmpeg *FFmpeg) NewCommand(inputGroup InputGroup, outputGroup OutputGroup) *Command {
 	return &Command{
-		FFmpegPath:  ffmpeg.config.FFmpegPath,
+		FFmpegPath:  ffmpeg.FFmpegBin,
 		InputGroup:  inputGroup,
 		OutputGroup: outputGroup,
 	}

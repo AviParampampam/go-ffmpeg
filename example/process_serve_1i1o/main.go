@@ -5,7 +5,10 @@ import (
 )
 
 func main() {
-	f := ffmpeg.New(ffmpeg.NewConfig())
+	f, err := ffmpeg.New(ffmpeg.NewConfig()).Init()
+	if err != nil {
+		panic(err)
+	}
 
 	go createCommand(f, "rtsp://admin:12345678@192.168.1.15:554/ch01.264?dev=1", "records/cam1/%Y-%m-%dT%H:%M:%S.mp4").Serve(nil, nil, 8)
 	go createCommand(f, "rtsp://admin:12345678@192.168.1.70:554/h264Preview_01_main", "records/cam2/%Y-%m-%dT%H:%M:%S.mp4").Serve(nil, nil, 8)
