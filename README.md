@@ -1,7 +1,5 @@
-# FFmpeg in Golang
+# Библиотека для использования FFmpeg в Golang
 
-Simple level integration for easy installation.
-To start, you need to have the FFmpeg installed:
-
-### Installation in **Ubuntu**  
-```sudo apt install ffmpeg```
+## Зависимости 
+- ffmpeg
+- go (^1.16.3)
